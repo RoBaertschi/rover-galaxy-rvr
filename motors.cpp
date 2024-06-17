@@ -46,3 +46,11 @@ void motorsSetMotors(int8_t power0, int8_t power1) {
     SoftPWMSet(MOTOR_PINS[i*2+1], !dir[i] * newPower[i]);
   }
 }
+
+void motorsDo360(int8_t direction, int8_t power){
+  if (direction == 0) {
+    motorsTurnLeft(power);
+  } else {
+    motorsTurnRight(power);
+  }
+};

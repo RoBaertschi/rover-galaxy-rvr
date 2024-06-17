@@ -86,4 +86,8 @@ void onReceive() {
     leftMotor = throttle_L;
     rightMotor = throttle_R;
   }
+
+  if (aiCam.getButton(REGION_I)) {
+    motorsDo360(0, 10);
+  }
 }

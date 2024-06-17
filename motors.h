@@ -14,5 +14,6 @@ void motorsTurnLeft(int8_t power);
 void motorsTurnRight(int8_t power);
 void motorsStop();
 void motorsSetMotors(int8_t power, int8_t power2);
+void motorsDo360(int8_t direction, int8_t power);
 
 #endif

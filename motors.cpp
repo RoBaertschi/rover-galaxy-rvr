@@ -50,7 +50,9 @@ void motorsSetMotors(int8_t power0, int8_t power1) {
 void motorsDo360(int8_t direction, int8_t power){
   if (direction == 0) {
     motorsTurnLeft(power);
+    motorsTurnRight(-power);
   } else {
     motorsTurnRight(power);
+    motorsTurnLeft(-power);
   }
 };

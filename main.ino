@@ -28,6 +28,8 @@ AiCamera aiCam = AiCamera("GalaxyRVR", "GalaxyRVR");
 int leftMotor = 0;
 int rightMotor = 0;
 
+bool do360 = false;
+
 void setup() {
   int m = millis();
   Serial.begin(115200);
@@ -36,7 +38,7 @@ void setup() {
   beginMotors();
 
   Serial.println("Starting Camera");
-  aiCam.begin("GalaxyRVR", "12345678", WIFI_MODE_AP, "8765");
+  aiCam.begin("Lutscher360", "12345678", WIFI_MODE_AP, "8765");
   aiCam.setOnReceived(onReceive);
 
   while (millis() - m < 500) {
@@ -47,6 +49,9 @@ void setup() {
 void loop() {
   aiCam.loop();
   motorsSetMotors(leftMotor, rightMotor);
+  if (do360) {
+    motorsDo360(0, 100);
+  }
 }
 
 void onReceive() {
@@ -86,8 +91,8 @@ void onReceive() {
     leftMotor = throttle_L;
     rightMotor = throttle_R;
   }
-
-  if (aiCam.getButton(REGION_I)) {
-    motorsDo360(0, 10);
+  if (!aiCam.getSwitch(REGION_E) && do360) {
+    motorsSetMotors(0,0);
   }
+  do360 = aiCam.getSwitch(REGION_E);
 }
